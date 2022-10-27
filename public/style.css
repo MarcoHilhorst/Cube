@@ -1,0 +1,21 @@
+img {
+    width: 240px;
+    height: auto;
+}
+
+.flex {
+ display: flex;
+ flex-wrap: wrap;
+ width: 80%;
+}
+
+.srcRes{
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+li {
+    list-style: none;
+}

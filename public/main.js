@@ -1,0 +1,135 @@
+// const bodyParser = require("body-parser");
+
+document.querySelector('button').addEventListener('click', fetchName)
+//enables calls to JQuery function
+hoverImage = null;
+
+// function that removes the previous search results from the DOM
+function removeElementsByClass(className){
+    var elements = document.getElementsByClassName(className);
+    while(elements.length > 0){
+      elements[0].parentNode.removeChild(elements[0]);
+    }
+}
+
+//constructor function for storing search results so that they can be added to the database if desired
+class SearchRes {
+    constructor(name, img, color, type, cmc){
+        this.name = name
+        this.img = img
+        this.color = color
+        this.type = type
+        this.cmc = cmc
+    }
+}
+
+
+
+// function to allow for a timeout before fetch request to prevent spamming the api
+function delay(ms){
+    return new Promise(resolve => setTimeout(resolve, ms))
+}
+
+
+
+
+async function fetchName(){
+
+    removeElementsByClass('results')
+    const searchName = document.querySelector('.cardSearch').value
+    const url = `https://api.scryfall.com/cards/search?order=cmc&q=${searchName}`
+    await delay(100)
+
+    fetch(url)
+        .then(res => res.json())
+        .then(data => {
+            console.log(data.data)
+            let searchResults = []
+            data.data.forEach((element, index) => {
+
+                // console.log(`card number ${index} : ${element.image_uris}. Name: ${element.name}`)
+
+                //element creation
+                var li = document.createElement("li") 
+                var img = document.createElement("img")
+                var addButton = document.createElement("button")
+
+                li.className = 'results'       
+
+    
+                // card called ragged recluse has 2 card faces. This doesnt have the image_uri property, and instead the two images of the card are under .card_faces[0].image_uris and card_faces[1].image_uris.
+
+                
+                // if(typeof element.card_faces[0].image_uris.normal === "string"){
+                if(typeof element.card_faces[0].image_uris.normal === "string"){
+                    img.className = 'text-hover-image two-face'
+                    img.src = element.card_faces[0].image_uris.normal
+                    img.dataset.imgForHover = element.card_faces[0].image_uris.normal
+                    
+                } 
+                 else {
+                    img.className = 'text-hover-image'
+                    img.src = element.image_uris.normal
+                    img.dataset.imgForHover = element.image_uris.normal
+                }
+
+
+                addButton.innerText = "Add to Cube"
+                addButton.className = "addCard"
+                addButton.dataset.srNum = index   
+
+                document.querySelector('.displayResults').appendChild(li).append(img, addButton)
+
+                //create objects to potentially store in DB later
+                // const fuckem = new SearchRes(element.name, element.image_uris.normal, element.color_identity, element.type_line, element.cmc)
+                // searchResults.push(fuckem)
+                
+                
+
+            });
+
+        
+
+            // console.log(searchResults)
+           var test = document.querySelectorAll('.addCard')
+            for(var addCard of test){
+                
+                addCard.addEventListener('click', testing)
+
+            }
+            function testing(yip){
+                let n = yip.target.dataset.srNum
+                console.log(searchResults[n])
+                fetch('/cube-list', {
+                    method: 'post',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        name: searchResults[n].name,
+                        image: searchResults[n].img,
+                        color: searchResults[n].color,
+                        type: searchResults[n].type, 
+                        cmc: searchResults[n].cmc,
+                    })
+                })
+                
+            }
+
+            
+            // Calls the hover function written in JQuery
+            function enableHover(){
+                hoverImage();
+            }
+            enableHover()
+            
+
+
+
+
+        })
+
+        
+        .catch(err=> {
+            console.error(err)
+        })
+    
+};
