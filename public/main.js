@@ -47,8 +47,6 @@ async function fetchName(){
             let searchResults = []
             data.data.forEach((element, index) => {
 
-                // console.log(`card number ${index} : ${element.image_uris}. Name: ${element.name}`)
-
                 //element creation
                 var li = document.createElement("li") 
                 var img = document.createElement("img")
@@ -56,47 +54,42 @@ async function fetchName(){
 
                 li.className = 'results'       
 
-    
-                // card called ragged recluse has 2 card faces. This doesnt have the image_uri property, and instead the two images of the card are under .card_faces[0].image_uris and card_faces[1].image_uris.
-
-                
-                // if(typeof element.card_faces[0].image_uris.normal === "string"){
-                if(typeof element.card_faces[0].image_uris.normal === "string"){
+                // card called ragged recluse has 2 card faces. This doesnt have the image_uri property, and instead the two images of the card are under .card_faces[0].image_uris and card_faces[1].image_uris.                
+                if(element.hasOwnProperty('card_faces')){
                     img.className = 'text-hover-image two-face'
                     img.src = element.card_faces[0].image_uris.normal
                     img.dataset.imgForHover = element.card_faces[0].image_uris.normal
-                    
+                    img.dataset.secondFace = element.card_faces[1].image_uris.normal
+
+                    const addNew2FCard = new SearchRes(element.name, element.card_faces[0].image_uris.normal, element.color_identity, element.type_line, element.cmc)
+                    searchResults.push(addNew2FCard)
                 } 
                  else {
                     img.className = 'text-hover-image'
                     img.src = element.image_uris.normal
                     img.dataset.imgForHover = element.image_uris.normal
+                    //creates objects of each card that can be added to db later
+                    const addNewCard = new SearchRes(element.name, element.image_uris.normal, element.color_identity, element.type_line, element.cmc)
+                    searchResults.push(addNewCard)
                 }
-
 
                 addButton.innerText = "Add to Cube"
                 addButton.className = "addCard"
                 addButton.dataset.srNum = index   
 
                 document.querySelector('.displayResults').appendChild(li).append(img, addButton)
-
-                //create objects to potentially store in DB later
-                // const fuckem = new SearchRes(element.name, element.image_uris.normal, element.color_identity, element.type_line, element.cmc)
-                // searchResults.push(fuckem)
-                
-                
-
+           
             });
 
         
 
-            // console.log(searchResults)
-           var test = document.querySelectorAll('.addCard')
-            for(var addCard of test){
-                
-                addCard.addEventListener('click', testing)
+            // code for the add to database buttons
+           var addToDatabase = document.querySelectorAll('.addCard')
 
+            for(var addCard of addToDatabase){
+                addCard.addEventListener('click', testing)
             }
+
             function testing(yip){
                 let n = yip.target.dataset.srNum
                 console.log(searchResults[n])
@@ -111,7 +104,7 @@ async function fetchName(){
                         cmc: searchResults[n].cmc,
                     })
                 })
-                
+                // $(".cardHasBeenAdded").fadeIn( 300 ).delay( 1000 ).fadeOut( 400 );
             }
 
             
@@ -120,6 +113,11 @@ async function fetchName(){
                 hoverImage();
             }
             enableHover()
+
+            //
+            function cardAdded(){
+                // addedAlert();    
+            }
             
 
 
