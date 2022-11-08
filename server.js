@@ -9,6 +9,7 @@ const bodyParser = require('body-parser')
 MongoClient.connect('mongodb+srv://Ajeki:TSj7h6egDmpzIfVX@cubecluster.f9frrqd.mongodb.net/?retryWrites=true&w=majority', { useUnifiedTopology: true }) 
 .then (client => {
     console.log('Connected to database')
+    
     const db = client.db('Cube')
     const cubeList = db.collection('cube-list')
     
@@ -23,6 +24,15 @@ MongoClient.connect('mongodb+srv://Ajeki:TSj7h6egDmpzIfVX@cubecluster.f9frrqd.mo
 
     app.get("/", (req, res) => {
         res.render('index.ejs')
+    })
+
+    app.get("/collection", (req, res) => {
+        cubeList.find().toArray()
+        .then(data => {
+            res.render('collection.ejs', { info: data })
+        })
+        .catch(error => console.error(error))
+        // res.render('collection.ejs')
     })
 
 
