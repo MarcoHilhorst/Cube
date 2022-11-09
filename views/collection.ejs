@@ -4,348 +4,395 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Cube List</title>
+    <link rel="stylesheet" href="cubelist.css">
 </head>
 <body>
-    <h1>This is my new page</h1>
-    <nav>
+    <div class="wrapper">
+        <h1>This is my new page</h1>
+        <nav>
+            <section>
+                <ul>
+                    <li>Home</li>
+                    <li>list</li>
+                </ul>
+            </section>
+            <section>
+                <ul>
+                    <li><p>table</p></li>
+                    <li><p>curve view</p></li>
+                </ul>
+            </section>
+        </nav>
         <section>
-            <ul>
-                <li>Home</li>
-                <li>list</li>
-            </ul>
+            <div class="white">
+                <h3>White</h3>
+                <p>(Number here)</p>
+                <div class="creature">
+                    <span>Creatures</span>
+                    <ul class="whiteCreatures">
+                        <ul class="cmc1">
+                            
+                            <% for(let i=0; i < info.length; i++) {%>
+                                <!-- declarations to help with conditionals -->
+                                <% let mono = info[i].color.length === 1 %>
+                                <% let white = info[i].color[0] === "W" %>
+                                <% let blue = info[i].color[0] === "U" %>
+                                <% let black = info[i].color[0] === "B" %>
+                                <% let red = info[i].color[0] === "R" %>
+                                <% let green = info[i].color[0] === "G" %>
+                                <% let creature = info[i].type.includes("Creature")%>
+                                <% let instant = info[i].type.includes("Instant")%>
+                                <% let sorcery = info[i].type.includes("Sorcery")%>
+                                <% let enchantment = info[i].type.includes("Enchantment")%>
+                                <% let planeswalker = info[i].type.includes("planeswalker")%>
+                                <% let artifact = info[i].type.includes("Artifact")%>
+                                
+                                <!-- check if the color is white, creature, and cmc of 1 -->
+                                <% if(mono && white && creature && info[i].cmc === 1) {%>
+                                    <li>
+                                        <span><%= info[i].name %></span>
+                                    </li>
+                                <% } %>
+                            <% } %>
+                        </ul>
+                        <ul class="cmc2">
+                            <% for(let i=0; i < info.length; i++) {%>
+                                <!-- check if the color is white, creature, and cmc of 1 -->
+                                <% if(info[i].color.length === 1 && info[i].color[0] === "W" && info[i].type.toLowerCase().includes("creature") && info[i].cmc === 2) {%>
+                                    <li>
+                                        <span><%= info[i].name %></span>
+                                    </li>
+                                <% } %>
+                            <% } %>
+                        </ul>
+                        <ul class="cmc3">
+                            <% for(let i=0; i < info.length; i++) {%>
+                                <!-- check if the color is white, creature, and cmc of 1 -->
+                                <% if(info[i].color.length === 1 && info[i].color[0] === "W" && info[i].type.toLowerCase().includes("creature") && info[i].cmc === 3) {%>
+                                    <li>
+                                        <span><%= info[i].name %></span>
+                                    </li>
+                                <% } %>
+                            <% } %>
+                        </ul>
+                        <ul class="cmc4">
+                            <% for(let i=0; i < info.length; i++) {%>
+                                <!-- check if the color is white, creature, and cmc of 1 -->
+                                <% if(info[i].color.length === 1 && info[i].color[0] === "W" && info[i].type.toLowerCase().includes("creature") && info[i].cmc === 4) {%>
+                                    <li>
+                                        <span><%= info[i].name %></span>
+                                    </li>
+                                <% } %>
+                            <% } %>
+                        </ul>
+                    </ul>
+                </div>
+                <div class="instant">
+                    <span>Instants</span>
+                    <ul>
+                        <ul class="cmc1">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                        <ul class="cmc2">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                    </ul>
+                </div>
+                <div class="sorcery">
+                    <span>Sorcery</span>
+                    <ul>
+                        <ul class="cmc1">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                        <ul class="cmc2">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                    </ul>
+                </div>
+                <div class="enchantment">
+                    <span>Enchantment</span>
+                    <ul>
+                        <ul class="cmc1">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                        <ul class="cmc2">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                    </ul>
+                </div>
+            </div>
+            <div class="Blue">
+                <h3>Blue</h3>
+                <p>(Number here)</p>
+                <div class="creature">
+                    <span>Creatures</span>
+                    <ul>
+                        <ul class="cmc1">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                        <ul class="cmc2">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                    </ul>
+                </div>
+                <div class="instant">
+                    <span>Instants</span>
+                    <ul>
+                        <ul class="cmc1">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                        <ul class="cmc2">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                    </ul>
+                </div>
+                <div class="sorcery">
+                    <span>Sorcery</span>
+                    <ul>
+                        <ul class="cmc1">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                        <ul class="cmc2">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                    </ul>
+                </div>
+                <div class="enchantment">
+                    <span>Enchantment</span>
+                    <ul>
+                        <ul class="cmc1">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                        <ul class="cmc2">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                    </ul>
+                </div>
+            </div>
+            <div class="Black">
+                <h3>Black</h3>
+                <p>(Number here)</p>
+                <div class="creature">
+                    <span>Creatures</span>
+                    <ul>
+                        <ul class="cmc1">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                        <ul class="cmc2">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                    </ul>
+                </div>
+                <div class="instant">
+                    <span>Instants</span>
+                    <ul>
+                        <ul class="cmc1">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                        <ul class="cmc2">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                    </ul>
+                </div>
+                <div class="sorcery">
+                    <span>Sorcery</span>
+                    <ul>
+                        <ul class="cmc1">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                        <ul class="cmc2">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                    </ul>
+                </div>
+                <div class="enchantment">
+                    <span>Enchantment</span>
+                    <ul>
+                        <ul class="cmc1">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                        <ul class="cmc2">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                    </ul>
+                </div>
+            </div>
+            <div class="Red">
+                <h3>Red</h3>
+                <p>(Number here)</p>
+                <div class="creature">
+                    <span>Creatures</span>
+                    <ul>
+                        <ul class="cmc1">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                        <ul class="cmc2">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                    </ul>
+                </div>
+                <div class="instant">
+                    <span>Instants</span>
+                    <ul>
+                        <ul class="cmc1">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                        <ul class="cmc2">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                    </ul>
+                </div>
+                <div class="sorcery">
+                    <span>Sorcery</span>
+                    <ul>
+                        <ul class="cmc1">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                        <ul class="cmc2">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                    </ul>
+                </div>
+                <div class="enchantment">
+                    <span>Enchantment</span>
+                    <ul>
+                        <ul class="cmc1">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                        <ul class="cmc2">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                    </ul>
+                </div>
+            </div>
+            <div class="Green">
+                <h3>Green</h3>
+                <p>(Number here)</p>
+                <div class="creature">
+                    <span>Creatures</span>
+                    <ul>
+                        <ul class="cmc1">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                        <ul class="cmc2">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                    </ul>
+                </div>
+                <div class="instant">
+                    <span>Instants</span>
+                    <ul>
+                        <ul class="cmc1">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                        <ul class="cmc2">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                    </ul>
+                </div>
+                <div class="sorcery">
+                    <span>Sorcery</span>
+                    <ul>
+                        <ul class="cmc1">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                        <ul class="cmc2">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                    </ul>
+                </div>
+                <div class="enchantment">
+                    <span>Enchantment</span>
+                    <ul>
+                        <ul class="cmc1">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                        <ul class="cmc2">
+                            <li>
+                                card name here
+                            </li>
+                        </ul>
+                    </ul>
+                </div>
+            </div>
+            
         </section>
-        <section>
-            <ul>
-                <li><p>table</p></li>
-                <li><p>curve view</p></li>
-            </ul>
-        </section>
-    </nav>
-    <section>
-        <div class="white">
-            <h3>White</h3>
-            <p>(Number here)</p>
-            <div class="creature">
-                <span>Creatures</span>
-                <ul>
-                    <ul class="cmc1">
-                        <% for(let i=0; i < info.length; i++) {%>
-                        <li>
-                            <span><%= info[i].name %></span>
-                        </li>
-                        <% } %>
-                    </ul>
-                    <ul class="cmc2">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                </ul>
-            </div>
-            <div class="instant">
-                <span>Instants</span>
-                <ul>
-                    <ul class="cmc1">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                    <ul class="cmc2">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                </ul>
-            </div>
-            <div class="sorcery">
-                <span>Sorcery</span>
-                <ul>
-                    <ul class="cmc1">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                    <ul class="cmc2">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                </ul>
-            </div>
-            <div class="enchantment">
-                <span>Enchantment</span>
-                <ul>
-                    <ul class="cmc1">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                    <ul class="cmc2">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                </ul>
-            </div>
-        </div>
-        <div class="Blue">
-            <h3>Blue</h3>
-            <p>(Number here)</p>
-            <div class="creature">
-                <span>Creatures</span>
-                <ul>
-                    <ul class="cmc1">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                    <ul class="cmc2">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                </ul>
-            </div>
-            <div class="instant">
-                <span>Instants</span>
-                <ul>
-                    <ul class="cmc1">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                    <ul class="cmc2">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                </ul>
-            </div>
-            <div class="sorcery">
-                <span>Sorcery</span>
-                <ul>
-                    <ul class="cmc1">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                    <ul class="cmc2">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                </ul>
-            </div>
-            <div class="enchantment">
-                <span>Enchantment</span>
-                <ul>
-                    <ul class="cmc1">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                    <ul class="cmc2">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                </ul>
-            </div>
-        </div>
-        <div class="Black">
-            <h3>Black</h3>
-            <p>(Number here)</p>
-            <div class="creature">
-                <span>Creatures</span>
-                <ul>
-                    <ul class="cmc1">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                    <ul class="cmc2">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                </ul>
-            </div>
-            <div class="instant">
-                <span>Instants</span>
-                <ul>
-                    <ul class="cmc1">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                    <ul class="cmc2">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                </ul>
-            </div>
-            <div class="sorcery">
-                <span>Sorcery</span>
-                <ul>
-                    <ul class="cmc1">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                    <ul class="cmc2">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                </ul>
-            </div>
-            <div class="enchantment">
-                <span>Enchantment</span>
-                <ul>
-                    <ul class="cmc1">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                    <ul class="cmc2">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                </ul>
-            </div>
-        </div>
-        <div class="Red">
-            <h3>Red</h3>
-            <p>(Number here)</p>
-            <div class="creature">
-                <span>Creatures</span>
-                <ul>
-                    <ul class="cmc1">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                    <ul class="cmc2">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                </ul>
-            </div>
-            <div class="instant">
-                <span>Instants</span>
-                <ul>
-                    <ul class="cmc1">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                    <ul class="cmc2">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                </ul>
-            </div>
-            <div class="sorcery">
-                <span>Sorcery</span>
-                <ul>
-                    <ul class="cmc1">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                    <ul class="cmc2">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                </ul>
-            </div>
-            <div class="enchantment">
-                <span>Enchantment</span>
-                <ul>
-                    <ul class="cmc1">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                    <ul class="cmc2">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                </ul>
-            </div>
-        </div>
-        <div class="Green">
-            <h3>Green</h3>
-            <p>(Number here)</p>
-            <div class="creature">
-                <span>Creatures</span>
-                <ul>
-                    <ul class="cmc1">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                    <ul class="cmc2">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                </ul>
-            </div>
-            <div class="instant">
-                <span>Instants</span>
-                <ul>
-                    <ul class="cmc1">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                    <ul class="cmc2">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                </ul>
-            </div>
-            <div class="sorcery">
-                <span>Sorcery</span>
-                <ul>
-                    <ul class="cmc1">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                    <ul class="cmc2">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                </ul>
-            </div>
-            <div class="enchantment">
-                <span>Enchantment</span>
-                <ul>
-                    <ul class="cmc1">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                    <ul class="cmc2">
-                        <li>
-                            card name here
-                        </li>
-                    </ul>
-                </ul>
-            </div>
-        </div>
-        
-    </section>
+    </div>
+    <script src="/second.js"></script>
 </body>
 </html>
