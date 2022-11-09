@@ -12,6 +12,7 @@ class ColorList {
 
 let whiteCards = new ColorList({cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []})
 
+let testCards = "test"
 
 
 // let whiteCards = {
