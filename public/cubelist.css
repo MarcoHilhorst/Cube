@@ -6,3 +6,7 @@ ul {
 .wrapper {
     margin: 20px;
 }
+
+.flex {
+    display: flex;
+}
