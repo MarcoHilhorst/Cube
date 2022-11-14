@@ -75,17 +75,40 @@ class ColorList {
 
     populateColor(){
         // console.log(this.creature.cards)
-        
         this.creature.cards.forEach(element => {
             var li = document.createElement("li")
             li.innerHTML = element
-            document.querySelector('.white.creature').append(li)
+            document.querySelector(`.${this.textCol}.creature`).append(li)
         })
 
         this.instant.cards.forEach(element => {
             var li = document.createElement('li')
             li.innerHTML = element
-            document.querySelector(`.${this.textCol}`)
+            document.querySelector(`.${this.textCol}.instant`).append(li)
+        })
+
+        this.sorcery.cards.forEach(element => {
+            var li = document.createElement('li')
+            li.innerHTML = element
+            document.querySelector(`.${this.textCol}.sorcery`).append(li)
+        })
+
+        this.enchantment.cards.forEach(element => {
+            var li = document.createElement('li')
+            li.innerHTML = element
+            document.querySelector(`.${this.textCol}.enchantment`).append(li)
+        })
+
+        this.artifact.cards.forEach(element => {
+            var li = document.createElement('li')
+            li.innerHTML = element
+            document.querySelector(`.${this.textCol}.artifact`).append(li)
+        })
+
+        this.planeswalker.cards.forEach(element => {
+            var li = document.createElement('li')
+            li.innerHTML = element
+            document.querySelector(`.${this.textCol}.planeswalker`).append(li)
         })
     }
 
@@ -94,15 +117,15 @@ class ColorList {
 //Colour combination categories
 let whiteCards = new ColorList({cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, "W", "white")
 
-let blueCards = new ColorList({cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, "U")
+let blueCards = new ColorList({cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, "U", "blue")
 
-let blackCards = new ColorList({cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, "B")
+let blackCards = new ColorList({cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, "B", "black")
 
-let redCards = new ColorList({cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, "R")
+let redCards = new ColorList({cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, "R", "red")
 
-let greenCards = new ColorList({cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, "G")
+let greenCards = new ColorList({cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, "G", "green")
 
-let gruulCards = new ColorList({cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, "G,R")
+let gruulCards = new ColorList({cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, {cards: [], cmcs: []}, "G,R", "gruul")
 
 
 
@@ -130,6 +153,11 @@ function getFetch(){
             greenCards.orderCMC()
 
             whiteCards.populateColor()
+            blueCards.populateColor()
+            blackCards.populateColor()
+            redCards.populateColor()
+            greenCards.populateColor()
+
 
         })
         .catch(err => {

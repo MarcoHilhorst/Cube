@@ -43,7 +43,7 @@ async function fetchName(){
     fetch(url)
         .then(res => res.json())
         .then(data => {
-            console.log(data.data)
+            // console.log(data.data)
             let searchResults = []
             data.data.forEach((element, index) => {
 
@@ -92,7 +92,7 @@ async function fetchName(){
 
             function testing(yip){
                 let n = yip.target.dataset.srNum
-                console.log(searchResults[n])
+                // console.log(searchResults[n])
                 fetch('/cube-list', {
                     method: 'post',
                     headers: {'Content-Type': 'application/json'},
@@ -104,6 +104,7 @@ async function fetchName(){
                         cmc: searchResults[n].cmc,
                     })
                 })
+                alert ('card added to list!')
                 // $(".cardHasBeenAdded").fadeIn( 300 ).delay( 1000 ).fadeOut( 400 );
             }
 
