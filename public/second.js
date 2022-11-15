@@ -65,6 +65,7 @@ class ColorList {
     //sorts the cmc array for each card type into ascending order
     orderCMC(){
         this.creature.cmcs = this.creature.cmcs.sort((x, y) => x - y)
+        this.creature.cards = this.creature.cards.sort((a, b) => a.name.localeCompare(b.name))
         this.instant.cmcs = this.instant.cmcs.sort((x, y) => x - y)
         this.sorcery.cmcs = this.sorcery.cmcs.sort((x, y) => x - y)
         this.enchantment.cmcs = this.enchantment.cmcs.sort((x, y) => x - y)
@@ -74,42 +75,65 @@ class ColorList {
 
 
     populateColor(){
-        // console.log(this.creature.cards)
-        this.creature.cards.forEach(element => {
-            var li = document.createElement("li")
-            li.innerHTML = element.name
-            li.dataset.imgForHover = element.image
-            li.className = "text-hover-image"
-            document.querySelector(`.${this.textCol}.creature`).append(li)
+        
+        this.creature.cmcs.forEach(element => {
+            this.creature.cards.forEach(card => {
+                if(card.cmc === element){
+                    var li = document.createElement("li")
+                    li.innerHTML = card.name
+                    li.dataset.imgForHover = card.image
+                    li.className = "text-hover-image"
+                    document.querySelector(`.${this.textCol}.creature`).append(li)
+                }
+            })
+            
         })
+
+        // this.creature.cards.forEach(element => {
+        //     var li = document.createElement("li")
+        //     li.innerHTML = element.name
+        //     li.dataset.imgForHover = element.image
+        //     li.className = "text-hover-image"
+        //     document.querySelector(`.${this.textCol}.creature`).append(li)
+        // })
 
         this.instant.cards.forEach(element => {
             var li = document.createElement('li')
             li.innerHTML = element.name
+            li.dataset.imgForHover = element.image
+            li.className = "text-hover-image"
             document.querySelector(`.${this.textCol}.instant`).append(li)
         })
 
         this.sorcery.cards.forEach(element => {
             var li = document.createElement('li')
             li.innerHTML = element.name
+            li.dataset.imgForHover = element.image
+            li.className = "text-hover-image"
             document.querySelector(`.${this.textCol}.sorcery`).append(li)
         })
 
         this.enchantment.cards.forEach(element => {
             var li = document.createElement('li')
             li.innerHTML = element.name
+            li.dataset.imgForHover = element.image
+            li.className = "text-hover-image"
             document.querySelector(`.${this.textCol}.enchantment`).append(li)
         })
 
         this.artifact.cards.forEach(element => {
             var li = document.createElement('li')
             li.innerHTML = element.name
+            li.dataset.imgForHover = element.image
+            li.className = "text-hover-image"
             document.querySelector(`.${this.textCol}.artifact`).append(li)
         })
 
         this.planeswalker.cards.forEach(element => {
             var li = document.createElement('li')
             li.innerHTML = element.name
+            li.dataset.imgForHover = element.image
+            li.className = "text-hover-image"
             document.querySelector(`.${this.textCol}.planeswalker`).append(li)
         })
     }
