@@ -23,6 +23,8 @@ class SearchRes {
     }
 }
 
+class SearchRes2Faced extends SearchRes {}
+
 
 
 // function to allow for a timeout before fetch request to prevent spamming the api
@@ -43,7 +45,7 @@ async function fetchName(){
     fetch(url)
         .then(res => res.json())
         .then(data => {
-            // console.log(data.data)
+            console.log(data.data)
             let searchResults = []
             data.data.forEach((element, index) => {
 
@@ -61,6 +63,10 @@ async function fetchName(){
                     img.dataset.imgForHover = element.card_faces[0].image_uris.normal
                     img.dataset.secondFace = element.card_faces[1].image_uris.normal
 
+
+
+
+                    //------- Need to add another category here for the second card face. Currently only one is stored --------
                     const addNew2FCard = new SearchRes(element.name, element.card_faces[0].image_uris.normal, element.color_identity, element.type_line, element.cmc)
                     searchResults.push(addNew2FCard)
                 } 
@@ -94,6 +100,7 @@ async function fetchName(){
                 let n = yip.target.dataset.srNum
                 // console.log(searchResults[n])
                 fetch('/cube-list', {
+                    //if search result target has a property of 'card_faces' (implying dual faced card), then post with a category for the second image. Something like "secondFace: searchResults[n]."
                     method: 'post',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({
