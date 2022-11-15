@@ -10,3 +10,8 @@ ul {
 .flex {
     display: flex;
 }
+
+img {
+    width: 240px;
+    height: auto;
+}

@@ -12,7 +12,7 @@ class ColorList {
     }
     // this method is used to filter cards from the DB into arrays based on type, while also storing the cmcs of matching cards
     sortCards(e){
-        let containsColor = e.color.toString() === this.cardColor.toString()
+        let containsColor = e.color.toString() === this.cardColor.toString() // if element color is the same as the color of this class
         let creature = e.type.includes("Creature") //may need to also include power/toughness to help distinguish enchantment creatures. Will need to add another category to the fetch /post in main.js
         let instant = e.type.includes("Instant")
         let sorcery = e.type.includes("Sorcery")
@@ -27,37 +27,37 @@ class ColorList {
             if(!this.creature.cmcs.some(check)){
                 this.creature.cmcs.push(e.cmc)
                 }
-            this.creature.cards.push(e.name)
+            this.creature.cards.push(e)
         }
         else if(containsColor && instant){
             if(!this.instant.cmcs.some(check)){
                 this.instant.cmcs.push(e.cmc)
                 }
-            this.instant.cards.push(e.name)
+            this.instant.cards.push(e)
         }
         else if(containsColor && sorcery){
             if(!this.sorcery.cmcs.some(check)){
                 this.sorcery.cmcs.push(e.cmc)
                 }
-            this.sorcery.cards.push(e.name)
+            this.sorcery.cards.push(e)
         }
         else if(containsColor && enchantment){
             if(!this.enchantment.cmcs.some(check)){
                 this.enchantment.cmcs.push(e.cmc)
                 }
-            this.enchantment.cards.push(e.name)
+            this.enchantment.cards.push(e)
         }
         else if(containsColor && artifact){
             if(!this.artifact.cmcs.some(check)){
                 this.artifact.cmcs.push(e.cmc)
                 }
-            this.artifact.cards.push(e.name)
+            this.artifact.cards.push(e)
         }
         else if(containsColor && planeswalker){
             if(!this.planeswalker.cmcs.some(check)){
                 this.planeswalker.cmcs.push(e.cmc)
                 }
-            this.planeswalker.cards.push(e.name)
+            this.planeswalker.cards.push(e)
         }
     }
     
@@ -71,43 +71,45 @@ class ColorList {
         this.artifact.cmcs = this.artifact.cmcs.sort((x, y) => x - y)
         this.planeswalker.cmcs = this.planeswalker.cmcs.sort((x, y) => x - y)
     }
-//tali was here lol
+
 
     populateColor(){
         // console.log(this.creature.cards)
         this.creature.cards.forEach(element => {
             var li = document.createElement("li")
-            li.innerHTML = element
+            li.innerHTML = element.name
+            li.dataset.imgForHover = element.image
+            li.className = "text-hover-image"
             document.querySelector(`.${this.textCol}.creature`).append(li)
         })
 
         this.instant.cards.forEach(element => {
             var li = document.createElement('li')
-            li.innerHTML = element
+            li.innerHTML = element.name
             document.querySelector(`.${this.textCol}.instant`).append(li)
         })
 
         this.sorcery.cards.forEach(element => {
             var li = document.createElement('li')
-            li.innerHTML = element
+            li.innerHTML = element.name
             document.querySelector(`.${this.textCol}.sorcery`).append(li)
         })
 
         this.enchantment.cards.forEach(element => {
             var li = document.createElement('li')
-            li.innerHTML = element
+            li.innerHTML = element.name
             document.querySelector(`.${this.textCol}.enchantment`).append(li)
         })
 
         this.artifact.cards.forEach(element => {
             var li = document.createElement('li')
-            li.innerHTML = element
+            li.innerHTML = element.name
             document.querySelector(`.${this.textCol}.artifact`).append(li)
         })
 
         this.planeswalker.cards.forEach(element => {
             var li = document.createElement('li')
-            li.innerHTML = element
+            li.innerHTML = element.name
             document.querySelector(`.${this.textCol}.planeswalker`).append(li)
         })
     }
@@ -135,7 +137,7 @@ function getFetch(){
     fetch('/collection/test')
         .then(res => res.json())
         .then(data => {
-            // console.log(data)
+            console.log(data)
             data.forEach(element =>{
 
                 whiteCards.sortCards(element)
@@ -159,6 +161,13 @@ function getFetch(){
             greenCards.populateColor()
 
 
+            function imgHover(){
+                hoverImageCube();
+            }
+            imgHover()
+            
+
+
         })
         .catch(err => {
             console.error(err)
@@ -167,6 +176,7 @@ function getFetch(){
 
 getFetch()
 
+//calls the hover function from JQuery
 
 
 
