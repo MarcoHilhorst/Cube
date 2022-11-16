@@ -23,7 +23,17 @@ class SearchRes {
     }
 }
 
-class SearchRes2Faced extends SearchRes {}
+
+class SearchRes2Faced {
+    constructor(name, img, color, type, cmc, secondImg){
+        this.name = name
+        this.img = img
+        this.color = color
+        this.type = type
+        this.cmc = cmc
+        this.secondImg = secondImg
+    }
+}
 
 
 
@@ -67,7 +77,12 @@ async function fetchName(){
 
 
                     //------- Need to add another category here for the second card face. Currently only one is stored --------
-                    const addNew2FCard = new SearchRes(element.name, element.card_faces[0].image_uris.normal, element.color_identity, element.type_line, element.cmc)
+
+
+                    // const addNew2FCard = new SearchRes(element.name, element.card_faces[0].image_uris.normal, element.color_identity, element.type_line, element.cmc)
+                    const addNew2FCard = new SearchRes2Faced(element.name, element.card_faces[0].image_uris.normal, element.color_identity, element.type_line, element.cmc, element.card_faces[1].image_uris.normal)
+
+
                     searchResults.push(addNew2FCard)
                 } 
                  else {
@@ -98,19 +113,37 @@ async function fetchName(){
 
             function testing(yip){
                 let n = yip.target.dataset.srNum
-                // console.log(searchResults[n])
-                fetch('/cube-list', {
-                    //if search result target has a property of 'card_faces' (implying dual faced card), then post with a category for the second image. Something like "secondFace: searchResults[n]."
-                    method: 'post',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({
-                        name: searchResults[n].name,
-                        image: searchResults[n].img,
-                        color: searchResults[n].color,
-                        type: searchResults[n].type, 
-                        cmc: searchResults[n].cmc,
+              
+                if(searchResults[n].secondImg){
+                    console.log(`${searchResults[n].name} has two faces`)
+                    fetch('/cube-list', {
+                        method: 'post',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({
+                            name: searchResults[n].name,
+                            image: searchResults[n].img,
+                            color: searchResults[n].color,
+                            type: searchResults[n].type, 
+                            cmc: searchResults[n].cmc,
+                            secondImg: searchResults[n].secondImg
+                            
+                        })
                     })
-                })
+                } else {
+                    fetch('/cube-list', {
+                        method: 'post',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({
+                            name: searchResults[n].name,
+                            image: searchResults[n].img,
+                            color: searchResults[n].color,
+                            type: searchResults[n].type, 
+                            cmc: searchResults[n].cmc,
+                            
+                        })
+                    })
+                }
+                
                 alert ('card added to list!')
                 // $(".cardHasBeenAdded").fadeIn( 300 ).delay( 1000 ).fadeOut( 400 );
             }
